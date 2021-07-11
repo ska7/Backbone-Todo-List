@@ -4,10 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Backbone Todo List</title>
+    <script src="/backbone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@latest/underscore-umd-min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <h1>QQQQQ</h1>
+    <div class="container">
+      <h1>TODO LIST</h1>
+
+      <input
+        class="form-control w-25"
+        style="margin-top: 50px"
+        placeholder="Add new todo"
+      />
+      <button class="btn btn-success" style="margin-top: 50px; width: 200px">
+        Add
+      </button>
+
+      <ul class="list-group" style="margin-top: 50px">
+        <li class="list-group-item d-flex">
+          <p>Finish the app</p>
+          <button class="btn btn-danger">Delete</button>
+        </li>
+      </ul>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

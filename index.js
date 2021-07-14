@@ -10,6 +10,9 @@ const DOMstrings = {
   input: document.getElementById("todo-input"),
 };
 
+const selectById = (id) => document.getElementById(id);
+const selectByClass = (cls) => document.querySelector(`.${cls}`);
+
 // Backbone Model for a single todo
 
 const Todo = Backbone.Model.extend({
@@ -34,17 +37,39 @@ const TodoView = Backbone.View.extend({
   events: {
     "click #edit-btn": "edit",
     "click #delete-btn": "delete",
+    "click #update-btn": "update",
+    "click #cancel-btn": "cancel",
   },
   initialize: function () {
     this.template = _.template($("#todo-template").html());
   },
   edit: function () {
-    console.log("something");
+    this.$("#edit-btn").hide();
+    this.$("#delete-btn").hide();
+    this.$("#update-btn").show();
+    this.$("#cancel-btn").show();
+    // selectByClass("todo-name").disabled = false;
+    // this.selectByClass("todo-name").focus();
+    this.$(".todo-name").attr("disabled", false);
+    this.$(".todo-name").focus();
   },
   delete: function () {
     const toBeDeleted = todos.findWhere({ id: this.model.id });
-    console.log("to be deleted", toBeDeleted);
     todos.remove(toBeDeleted);
+  },
+  update: function () {
+    this.switchButtons();
+    this.model.set("todoName", this.$(".todo-name").val());
+  },
+  cancel: function () {
+    this.switchButtons();
+    this.$(".todo-name").val(this.model.get("todoName"));
+  },
+  switchButtons: function () {
+    this.$("#edit-btn").show();
+    this.$("#delete-btn").show();
+    this.$("#update-btn").hide();
+    this.$("#cancel-btn").hide();
   },
   render: function () {
     this.$el.html(this.template(this.model.toJSON()));
@@ -69,11 +94,6 @@ const TodosView = Backbone.View.extend({
       .forEach((todo) =>
         self.$el.append(new TodoView({ model: todo }).render().$el)
       );
-    // console.log(
-    //   "weird shit",
-    //   new TodoView({ model: new Todo({ todoName: "random" }) }).render().$el[0]
-    // );
-
     return this;
   },
 });
@@ -87,6 +107,7 @@ const AppView = Backbone.View.extend({
   el: $(".todoapp"),
   events: {
     "click #add-btn": "addTodo",
+    keypress: "onEnterPress",
   },
 
   addTodo: function () {
@@ -96,10 +117,14 @@ const AppView = Backbone.View.extend({
       id: uuidv4(),
     });
     todos.add(newTodo);
+    DOMstrings.input.value = "";
   },
-  render: function () {
-    this.$el.html("TODO FINALLY ");
+  onEnterPress: function (e) {
+    if (e.originalEvent.code !== "Enter") return;
+
+    this.addTodo();
   },
+  render: function () {},
 });
 
 // Entry point for the app

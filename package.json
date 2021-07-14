@@ -1,11 +1,14 @@
 {
+  "homepage": "https://ska7.github.io/Backbone-Todo-List",
   "name": "backbone-backup",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "webpack serve --open",
-    "build": "webpack --watch"
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +21,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.2",
+    "gh-pages": "^3.2.3",
     "uuid": "^8.3.2"
   }
 }

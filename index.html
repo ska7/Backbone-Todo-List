@@ -24,11 +24,12 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"
     ></script>
   </head>
-  <body>
-    <div class="container todoapp">
+  <body style="background: grey;">
+    <div class="container todoapp" >
+
       <input
         id="todo-input"
-        class="form-control w-25 mt-5"
+        class="form-control w-25 mt-5 d-flex"
         placeholder="Add new todo"
       />
       <button
@@ -38,13 +39,25 @@
       >
         Add
       </button>
+
+
       <h1 class="mt-5">My Todos:</h1>
-      <ul class="list-group mt-5" id="todo-list"></ul>
+      <ul class="list-group mt-5" id="todo-list">
+        <li class="list-group-item d-flex flex-row justify-content-between w-75">
+          <input class="todo-name" style="border: none; outline: none;" value="Todo"/>
+          <div>
+          <button id="edit-btn" class="btn btn-warning" style="width: 100px">Edit</button>
+          <button id="delete-btn" class="btn btn-danger" style="width: 100px">Delete</button>
+          </li>
+      </ul>
     </div>
 
     <script type="text/template" id="todo-template">
       <li class="list-group-item d-flex flex-row justify-content-between w-75">
-        <p class="todo-name"><%= todoName %></p>
+        <div>
+        <input type="checkbox" checked/>
+           <input class="todo-name" style="border: none; outline: none; text-decoration: line-through" disabled value=<%= todoName %> />
+        </div>
         <div>
         <button id="edit-btn" class="btn btn-warning" style="width: 100px">Edit</button>
         <button id="delete-btn" class="btn btn-danger" style="width: 100px">Delete</button>
@@ -53,6 +66,17 @@
       </div>
       </li>
     </script>
+    <!-- Bizzabo Web Agenda Begin -->
+<div name="bizzabo-web-agenda" data-unique-name="298225" data-internal-website-base-url="https://events.bizzabo.com/298225"></div>
+<script type="text/javascript">(function() {
+    var bz = document.createElement('script');
+    bz.type = 'text/javascript';
+    bz.async = true;
+    bz.src = 'https://organizer.bizzabo.com/widgets/agenda/agenda.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(bz, s);
+})();</script>
+<!-- Bizzabo Web Agenda End -->
     <script src="index.js"></script>
   </body>
 </html>
